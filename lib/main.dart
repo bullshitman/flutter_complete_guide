@@ -8,8 +8,10 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   void answerQuestion() {
-    print('Answer chosen!');
+    questionIndex++;
   }
+
+  var questionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
           ),
           body: Column(
             children: [
-              Text('The question!'),
+              Text(questions[questionIndex]),
               ElevatedButton(
                 onPressed: answerQuestion,
                 child: Text('Answer 1'),
