@@ -12,6 +12,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Green', 'Red', 'White'],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Rabbit', 'Lion', 'Wolf', 'MenBearPig'],
+    },
+    {
+      'questionText': 'What\'s your favorite instructor?',
+      'answers': ['Max', 'Angela', 'Nobody', 'Universe'],
+    },
+  ];
+
   var _questionIndex = 0;
 
   void _answerQuestion() {
@@ -22,10 +37,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var _questions = [
-      'What\'s your favorite color',
-      'What\'s your favorite animal'
-    ];
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
@@ -34,21 +45,17 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Question(questionText: _questions[_questionIndex]),
-              Answer(
-                selectAnswer: _answerQuestion,
+              Question(
+                questionText: _questions[_questionIndex]['questionText'],
               ),
-              ElevatedButton(
-                onPressed: () => print('Answer 2 chosen'),
-                child: Text('Answer 2'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  //
-                  print('Answer 3 chosen');
-                },
-                child: Text('Answer 3'),
-              ),
+              ...(_questions[_questionIndex]['answers'] as List<String>)
+                  .map(
+                    (answer) => Answer(
+                      selectAnswer: _answerQuestion,
+                      answerText: answer,
+                    ),
+                  )
+                  .toList(),
             ],
           ),
         ),
