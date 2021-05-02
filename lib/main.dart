@@ -1,7 +1,6 @@
-import 'question.dart';
 import 'package:flutter/material.dart';
-import 'answer.dart';
 import 'quiz.dart';
+import 'result.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,10 +46,12 @@ class _MyAppState extends State<MyApp> {
             title: Text('First app!'),
           ),
           body: _questionIndex < _questions.length
-              ? Quiz(_answerQuestion, _questions)
-              : Center(
-                  child: Text('You did it!'),
-                ),
+              ? Quiz(
+                  answerQuestion: _answerQuestion,
+                  questions: _questions,
+                  questionIndex: _questionIndex,
+                )
+              : Result(),
         ),
       ),
     );
