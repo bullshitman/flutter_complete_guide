@@ -17,11 +17,11 @@ class Quiz extends StatelessWidget {
         Question(
           questionText: questions[questionIndex]['questionText'],
         ),
-        ...(questions[questionIndex]['answers'] as List<String>)
+        ...(questions[questionIndex]['answers'] as List<Map<String, Object>>)
             .map(
               (answer) => Answer(
-                selectAnswer: answerQuestion,
-                answerText: answer,
+                () => answerQuestion(answer['score']),
+                answerText: answer['text'],
               ),
             )
             .toList(),
